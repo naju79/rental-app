@@ -1,7 +1,6 @@
 package com.senai.rental_project.moldels;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -35,19 +33,21 @@ public class Movimentacao {
     @JoinColumn(name="usuario_id")
     private Usuario usuario;
 
-    @OneToMany(mappedBy="equipamento")
-    private List<Equipamento>equipamento;
+    @ManyToOne
+    @JoinColumn(name = "equipamento_id")
+    private Equipamento equipamento;
 
     public Movimentacao() {
     }
 
-    public Movimentacao(LocalDateTime dataMovimentacao, List<Equipamento> equipamento, Integer id, Integer quantidadeEquipamento, String tipoMovimentacao, Usuario usuario) {
-        this.dataMovimentacao = dataMovimentacao;
-        this.equipamento = equipamento;
+    public Movimentacao(Integer id, LocalDateTime dataMovimentacao, String tipoMovimentacao,
+            Integer quantidadeEquipamento, Usuario usuario, Equipamento equipamento) {
         this.id = id;
-        this.quantidadeEquipamento = quantidadeEquipamento;
+        this.dataMovimentacao = dataMovimentacao;
         this.tipoMovimentacao = tipoMovimentacao;
+        this.quantidadeEquipamento = quantidadeEquipamento;
         this.usuario = usuario;
+        this.equipamento = equipamento;
     }
 
     public Integer getId() {
@@ -90,13 +90,12 @@ public class Movimentacao {
         this.usuario = usuario;
     }
 
-    public List<Equipamento> getEquipamento() {
+    public Equipamento getEquipamento() {
         return equipamento;
     }
 
-    public void setEquipamento(List<Equipamento> equipamento) {
+    public void setEquipamento(Equipamento equipamento) {
         this.equipamento = equipamento;
     }
-
 
 }
