@@ -18,7 +18,7 @@ public class UsuarioService {
         return usuarioRepository.count();
     }
 
-    public Usuario buscarUsuario(Integer id) {
+    public Usuario buscarUsuario(Long id) {
         return usuarioRepository.findById(id).get();
     }
 
@@ -26,7 +26,7 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Boolean deletarUsuario(Integer id) {
+    public Boolean deletarUsuario(Long id) {
         if(usuarioRepository.existsById(id)) {
             usuarioRepository.deleteById(id);
             return true;
@@ -38,7 +38,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-      public Usuario atualizarUsuario(Integer id, Usuario usuario) {
+      public Usuario atualizarUsuario(Long id, Usuario usuario) {
         Usuario usuarioRecuperado = buscarUsuario(id);
         if (usuarioRecuperado != null) {
             usuarioRecuperado.setId(usuario.getId());
