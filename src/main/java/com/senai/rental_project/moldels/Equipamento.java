@@ -1,16 +1,13 @@
 package com.senai.rental_project.moldels;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class Equipamento {
@@ -18,13 +15,6 @@ public class Equipamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
-    @OneToMany(mappedBy = "equipamento")
-    private List<Movimentacao> movimentacoes;
 
     @Column(name="marca")
     private String marca;
@@ -56,12 +46,9 @@ public class Equipamento {
     public Equipamento() {
     }
 
-    public Equipamento(Long id, Usuario usuario, List<Movimentacao> movimentacoes, String marca, String modelo,
-            String categoria, BigDecimal potencia, String material, BigDecimal peso, String dimencoes, String cor,
-            Integer quantidadeDisponivel) {
+    public Equipamento(Long id, String marca, String modelo, String categoria, BigDecimal potencia, String material,
+            BigDecimal peso, String dimencoes, String cor, Integer quantidadeDisponivel) {
         this.id = id;
-        this.usuario = usuario;
-        this.movimentacoes = movimentacoes;
         this.marca = marca;
         this.modelo = modelo;
         this.categoria = categoria;
@@ -79,22 +66,6 @@ public class Equipamento {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<Movimentacao> getMovimentacoes() {
-        return movimentacoes;
-    }
-
-    public void setMovimentacoes(List<Movimentacao> movimentacoes) {
-        this.movimentacoes = movimentacoes;
     }
 
     public String getMarca() {
@@ -168,5 +139,8 @@ public class Equipamento {
     public void setQuantidadeDisponivel(Integer quantidadeDisponivel) {
         this.quantidadeDisponivel = quantidadeDisponivel;
     }
+
+   
+    
 
 }
